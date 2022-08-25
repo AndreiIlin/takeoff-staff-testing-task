@@ -1,4 +1,9 @@
 {
+  "login": [
+    {
+      "username": "admin"
+    }
+  ],
   "contacts": [
     {
       "id": 1,

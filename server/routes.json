@@ -1,0 +1,5 @@
+{
+  "/api/v1/login": "/login",
+  "/api/v1/contacts": "/contacts",
+  "/api/v1/contacts/:id": "/contacts/:id"
+}
