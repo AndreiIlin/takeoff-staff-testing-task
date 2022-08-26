@@ -1,10 +1,11 @@
-import {createEntityAdapter, createSlice} from '@reduxjs/toolkit';
-import {IContact} from '../models';
-import {RootState} from './index';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { IContact } from '../models';
+import { RootState } from './index';
+import { fetchData } from './thunks/fetchData';
 
 interface IExtraInitialState {
   isLoading: boolean,
-  error: string,
+  error: string | undefined,
 }
 
 const extraInitialState: IExtraInitialState = {
@@ -22,6 +23,21 @@ const contactsSlice = createSlice({
     addContact: contactsAdapter.addOne,
     changeContact: contactsAdapter.updateOne,
     removeContact: contactsAdapter.removeOne,
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchData.pending, (state) => {
+        state.isLoading = true;
+        state.error = '';
+      })
+      .addCase(fetchData.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        contactsAdapter.addMany(state, payload);
+      })
+      .addCase(fetchData.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      });
   },
 });
 

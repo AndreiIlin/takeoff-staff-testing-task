@@ -7,7 +7,6 @@ import Navbar from './Navbar';
 
 const PrivateRoute: React.FC = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
-  console.log(isAuth);
   return isAuth ? <Outlet /> : <Navigate to={'/login'} />;
 };
 

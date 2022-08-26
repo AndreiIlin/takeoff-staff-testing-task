@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IAuthState {
   isAuth: boolean,
@@ -6,7 +6,7 @@ interface IAuthState {
 
 type logInPayload = {
   username: string,
-  token: string,
+  // token: string,
 }
 
 const initialState: IAuthState = {
@@ -23,11 +23,13 @@ const authSlice = createSlice({
         return JSON.parse(user).token;
       }
     },
-    logIn: (state, {payload}: PayloadAction<logInPayload>) => {
+    logIn: (state, { payload }: PayloadAction<logInPayload>) => {
       localStorage.setItem('contactsApp', JSON.stringify(payload));
+      state.isAuth = true;
     },
-    logOut: () => {
+    logOut: (state) => {
       localStorage.removeItem('contactsApp');
+      state.isAuth = false;
     },
   },
 });
