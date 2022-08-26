@@ -4,7 +4,7 @@ import LoginForm from '../components/LoginForm';
 
 const LoginPage: React.FC = () => {
   return (
-    <Container>
+    <Container sx={{ mt: '1rem' }}>
       <LoginForm />
     </Container>
   );
