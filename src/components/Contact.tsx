@@ -2,8 +2,9 @@ import { MoreVert } from '@mui/icons-material';
 import { Avatar, Grid, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import { EntityId } from '@reduxjs/toolkit';
 import React from 'react';
-import { useAppSelector } from '../hooks/defaultHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/defaultHooks';
 import { selectors } from '../slices/contactsSlice';
+import { openModal } from '../slices/ModalsSlice';
 
 interface IContactProps {
   id: EntityId;
@@ -18,8 +19,13 @@ const Contact: React.FC<IContactProps> = ({ id }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const contact = useAppSelector((state) => selectors.selectById(state, id));
+  const dispatch = useAppDispatch();
+
+  const handleRemoveContact = () => {
+    dispatch(openModal({type: 'removeContact', extra: contact}));
+    handleClose();
+  }
 
   return (
     <Grid container m={1} mx={'auto'} maxWidth={500} justifyContent={'center'} alignItems={'center'} border={1}>
@@ -56,7 +62,7 @@ const Contact: React.FC<IContactProps> = ({ id }) => {
               }}
             >
               <MenuItem onClick={handleClose}>Edit</MenuItem>
-              <MenuItem onClick={handleClose}>Delete</MenuItem>
+              <MenuItem onClick={handleRemoveContact}>Delete</MenuItem>
             </Menu>
           </Grid>
           <Grid xs={10} item>

@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
 import { IContact } from '../models';
 import { RootState } from './index';
-import { fetchData } from './thunks/fetchData';
+import { fetchContacts } from './thunks/fetchContacts';
 
 interface IExtraInitialState {
   isLoading: boolean,
@@ -31,15 +31,15 @@ const contactsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchData.pending, (state) => {
+      .addCase(fetchContacts.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchData.fulfilled, (state, { payload }) => {
+      .addCase(fetchContacts.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         contactsAdapter.addMany(state, payload);
       })
-      .addCase(fetchData.rejected, (state, action) => {
+      .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error;
       });
