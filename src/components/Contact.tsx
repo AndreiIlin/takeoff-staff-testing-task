@@ -3,14 +3,15 @@ import { Avatar, Grid, IconButton, Menu, MenuItem, Typography } from '@mui/mater
 import { EntityId } from '@reduxjs/toolkit';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/defaultHooks';
+import { IContact } from '../models';
 import { selectors } from '../slices/contactsSlice';
 import { openModal } from '../slices/ModalsSlice';
 
 interface IContactProps {
-  id: EntityId;
+  contact: IContact;
 }
 
-const Contact: React.FC<IContactProps> = ({ id }) => {
+const Contact: React.FC<IContactProps> = ({ contact }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -19,11 +20,16 @@ const Contact: React.FC<IContactProps> = ({ id }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const contact = useAppSelector((state) => selectors.selectById(state, id));
+
   const dispatch = useAppDispatch();
 
   const handleRemoveContact = () => {
     dispatch(openModal({type: 'removeContact', extra: contact}));
+    handleClose();
+  }
+
+  const handleEditContact = () => {
+    dispatch(openModal({type: 'changeContact', extra: contact}));
     handleClose();
   }
 
@@ -61,7 +67,7 @@ const Contact: React.FC<IContactProps> = ({ id }) => {
                 'aria-labelledby': 'menu-button',
               }}
             >
-              <MenuItem onClick={handleClose}>Edit</MenuItem>
+              <MenuItem onClick={handleEditContact}>Edit</MenuItem>
               <MenuItem onClick={handleRemoveContact}>Delete</MenuItem>
             </Menu>
           </Grid>

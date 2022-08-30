@@ -42,7 +42,7 @@
     },
     {
       "id": 6,
-      "firstName": "Alison",
+      "firstName": "Alisson",
       "lastName": "Reichert",
       "image": "https://robohash.org/laboriosamfacilisrem.png",
       "phone": "+351 527 735 3642"
@@ -62,13 +62,6 @@
       "phone": "+86 946 297 2275"
     },
     {
-      "id": 9,
-      "firstName": "Demetrius",
-      "lastName": "Corkery",
-      "image": "https://robohash.org/excepturiiuremolestiae.png",
-      "phone": "+86 356 590 9727"
-    },
-    {
       "id": 10,
       "firstName": "Eleanora",
       "lastName": "Price",
@@ -81,13 +74,6 @@
       "lastName": "Jones",
       "image": "https://robohash.org/impeditautest.png",
       "phone": "+967 253 210 0344"
-    },
-    {
-      "id": 12,
-      "firstName": "Assunta",
-      "lastName": "Rath",
-      "image": "https://robohash.org/namquaerataut.png",
-      "phone": "+380 962 542 6549"
     },
     {
       "id": 13,
@@ -123,13 +109,6 @@
       "lastName": "Prohaska",
       "image": "https://robohash.org/accusantiumvoluptateseos.png",
       "phone": "+420 874 628 3710"
-    },
-    {
-      "id": 18,
-      "firstName": "Arely",
-      "lastName": "Skiles",
-      "image": "https://robohash.org/nihilharumqui.png",
-      "phone": "+55 886 766 8617"
     },
     {
       "id": 19,
