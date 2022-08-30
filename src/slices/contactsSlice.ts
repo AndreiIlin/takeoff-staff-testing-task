@@ -1,6 +1,7 @@
-import { createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
+import { AnyAction, createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
 import { IContact } from '../models';
 import { RootState } from './index';
+import { addContact } from './thunks/addContact';
 import { changeContact } from './thunks/changeContact';
 import { fetchContacts } from './thunks/fetchContacts';
 import { removeContact } from './thunks/removeContact';
@@ -14,6 +15,8 @@ const extraInitialState: IExtraInitialState = {
   isLoading: false,
   error: null,
 };
+
+const isError = (action: AnyAction) => action.type.endsWith('rejected');
 
 const contactsAdapter = createEntityAdapter<IContact>({
   sortComparer: (a, b) => a.firstName.localeCompare(b.firstName),
@@ -43,12 +46,19 @@ const contactsSlice = createSlice({
       .addCase(removeContact.fulfilled, (state, { payload }) => {
         contactsAdapter.removeOne(state, payload);
       })
-      .addCase(fetchContacts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error;
-      });
+      .addCase(addContact.fulfilled, (state, { payload }) => {
+        contactsAdapter.addOne(state, payload);
+      })
+      .addMatcher(
+        isError,
+        (state, action) => {
+          state.isLoading = false;
+          state.error = action.error;
+        },
+      );
   },
 });
+
 
 export const { clearError } = contactsSlice.actions;
 export const selectors = contactsAdapter.getSelectors((state: RootState) => state.contacts);

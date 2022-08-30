@@ -15,7 +15,7 @@ const initialState: IModalsState = {
 
 type openModalPayload = {
   type: string,
-  extra: IContact | undefined,
+  extra: IContact | null,
 }
 
 const modalsSlice = createSlice({

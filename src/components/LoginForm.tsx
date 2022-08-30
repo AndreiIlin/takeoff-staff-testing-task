@@ -1,15 +1,18 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/defaultHooks';
 import { logIn } from '../slices/AuthSlice';
 
 const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate();
   const [username, SetUsername] = useState('');
   const [password, SetPassword] = useState('');
 
   const submitHandler = () => {
-    dispatch(logIn({username}))
+    dispatch(logIn({username}));
+    navigate('/');
   }
   return (
     <Box

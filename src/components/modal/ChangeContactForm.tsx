@@ -27,7 +27,6 @@ const ChangeContactForm: React.FC<IModalProps> = ({ handleClose }) => {
       }
     >
       {({ values, handleChange, handleSubmit }) => (
-        // <>
         <Form onSubmit={handleSubmit}>
           <DialogTitle>Edit contact</DialogTitle>
           <DialogContent>
@@ -36,7 +35,7 @@ const ChangeContactForm: React.FC<IModalProps> = ({ handleClose }) => {
               value={values.firstName} onChange={handleChange}
             />
             <TextField
-              fullWidth margin={'normal'} label="lastName" name="lastName" required
+              fullWidth margin={'normal'} label="lastName" name="lastName"
               value={values.lastName} onChange={handleChange}
             />
             <TextField
@@ -44,7 +43,7 @@ const ChangeContactForm: React.FC<IModalProps> = ({ handleClose }) => {
               value={values.phone} onChange={handleChange}
             />
             <TextField
-              fullWidth margin={'normal'} label="image" name="image" required
+              fullWidth margin={'normal'} label="image" name="image"
               value={values.image} onChange={handleChange}
             />
           </DialogContent>
@@ -53,7 +52,6 @@ const ChangeContactForm: React.FC<IModalProps> = ({ handleClose }) => {
             <Button onClick={handleClose}>Cancel</Button>
           </DialogActions>
         </Form>
-        // </>
       )}
     </Formik>
   );
