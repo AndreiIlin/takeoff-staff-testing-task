@@ -1,7 +1,8 @@
 {
-  "login": [
+  "users": [
     {
-      "username": "admin"
+      "username": "admin",
+      "password": "admin"
     }
   ],
   "contacts": [
@@ -42,7 +43,7 @@
     },
     {
       "id": 6,
-      "firstName": "Alisson",
+      "firstName": "Alis",
       "lastName": "Reichert",
       "image": "https://robohash.org/laboriosamfacilisrem.png",
       "phone": "+351 527 735 3642"
