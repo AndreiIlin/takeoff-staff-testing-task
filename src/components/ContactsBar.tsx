@@ -1,4 +1,5 @@
-import { AppBar, Button, TextField, Toolbar, Typography } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useAppDispatch } from '../hooks/defaultHooks';
 import { openModal } from '../slices/ModalsSlice';
@@ -18,13 +19,31 @@ const ContactsBar: React.FC<IContactsBarProps> = ({ searchValue, SetSearchValue 
   };
 
   return (
-    <AppBar color={'inherit'} position={'static'} sx={{ maxWidth: 500, marginX: 'auto', marginY: 2 }}>
-      <Toolbar>
-        <Typography sx={{ fontWeight: 'bold' }}>Search:</Typography>
-        <TextField size={'small'} sx={{ marginX: 3 }} value={searchValue} onChange={handleSearch} />
-        <Button onClick={handleAddContact}>Add new contact</Button>
-      </Toolbar>
-    </AppBar>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexWrap: 'nowrap',
+        maxWidth: '500px',
+        marginX: 'auto',
+        marginY: '30px',
+      }}
+    >
+      <TextField
+        size={'small'}
+        value={searchValue}
+        aria-label={'Search'}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        onChange={handleSearch}
+      />
+      <Button variant={'outlined'} color={'inherit'} onClick={handleAddContact}>Add new contact</Button>
+    </Box>
   );
 };
 

@@ -27,7 +27,7 @@ const AddContactForm: React.FC<IModalProps> = ({ handleClose }) => {
       {({ values, handleChange, handleSubmit }) => (
         // <>
         <Form onSubmit={handleSubmit}>
-          <DialogTitle>Edit contact</DialogTitle>
+          <DialogTitle>Add new contact</DialogTitle>
           <DialogContent>
             <TextField
               fullWidth margin={'normal'} label="firstName" name="firstName" required
