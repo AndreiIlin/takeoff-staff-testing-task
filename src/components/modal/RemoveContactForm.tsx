@@ -9,9 +9,9 @@ const RemoveContactForm: React.FC<IModalProps> = ({ handleClose }) => {
   const dispatch = useAppDispatch();
 
   const handleRemove = () => {
-    dispatch(removeContact(contactData!.id))
+    dispatch(removeContact(contactData!.id));
     handleClose();
-  }
+  };
 
   return (
     <>

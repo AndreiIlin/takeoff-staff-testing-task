@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 import { useAppDispatch } from '../hooks/defaultHooks';
 import { logIn } from '../slices/AuthSlice';
 import { routes } from '../utils/routes';
@@ -13,11 +14,19 @@ const LoginForm: React.FC = () => {
 
   const [authError, setAuthError] = useState(false);
 
+  const validationSchema = Yup.object().shape({
+    username: Yup.string()
+      .required('Field \'Username\' cant`t be empty'),
+    password: Yup.string()
+      .required('Field \'Password\' cant`t be empty'),
+  });
+
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
+    validationSchema,
     onSubmit: async (values) => {
       try {
         const response = await axios.post(routes.loginData(), values);
@@ -49,26 +58,29 @@ const LoginForm: React.FC = () => {
         id="username"
         name="username"
         label="Username"
-        required
         value={formik.values.username}
         onChange={formik.handleChange}
         margin={'normal'}
-        error={authError}
+        error={authError || !!formik.errors.username}
       />
+      {formik.touched.username && formik.errors.username ?
+        <Typography variant={'caption'} color={'red'}>{formik.errors.username}</Typography> : null
+      }
       <TextField
         id="password"
         name="password"
         label="Password"
-        required
         value={formik.values.password}
         onChange={formik.handleChange}
         margin={'normal'}
-        error={authError}
+        error={authError || !!formik.errors.password}
       />
+      {formik.touched.password && formik.errors.password ?
+        <Typography variant={'caption'} color={'red'}>{formik.errors.password}</Typography> : null
+      }
       {authError && <Typography variant={'caption'} color={'red'}>Incorrect username or password</Typography>}
-      <Button type="submit">Submit</Button>
+      <Button sx={{ mt: 3 }} type="submit">Submit</Button>
     </Box>
-
   );
 };
 
