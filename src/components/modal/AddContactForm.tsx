@@ -30,19 +30,19 @@ const AddContactForm: React.FC<IModalProps> = ({ handleClose }) => {
           <DialogTitle>Add new contact</DialogTitle>
           <DialogContent>
             <TextField
-              fullWidth margin={'normal'} label="firstName" name="firstName" required
+              fullWidth margin={'normal'} label="First name" name="firstName" required
               value={values.firstName} onChange={handleChange}
             />
             <TextField
-              fullWidth margin={'normal'} label="lastName" name="lastName"
+              fullWidth margin={'normal'} label="Last name" name="lastName"
               value={values.lastName} onChange={handleChange}
             />
             <TextField
-              fullWidth margin={'normal'} label="phone" name="phone" required
+              fullWidth margin={'normal'} label="Phone number" name="phone" required
               value={values.phone} onChange={handleChange}
             />
             <TextField
-              fullWidth margin={'normal'} label="image" name="image"
+              fullWidth margin={'normal'} label="Avatar image" name="image"
               value={values.image} onChange={handleChange}
             />
           </DialogContent>

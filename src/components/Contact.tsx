@@ -1,4 +1,4 @@
-import { Avatar, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import React from 'react';
 import { IContact } from '../models';
 import ContactMenu from './ContactMenu';
@@ -10,28 +10,35 @@ interface IContactProps {
 const Contact: React.FC<IContactProps> = ({ contact }) => {
 
   return (
-    <Grid container m={1} mx={'auto'} maxWidth={500} justifyContent={'center'} alignItems={'center'} border={1}>
-      <Grid xs={4} sx={{ display: 'flex', justifyContent: 'center' }} item>
+    <Card
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        maxWidth: '500px',
+        marginX: 'auto',
+        mb: '20px',
+        alignItems: 'center',
+      }}
+    >
+      <CardMedia>
         <Avatar
           sx={{ width: 70, height: 70 }}
           src={contact?.image}
-          alt={contact?.firstName}
+          alt={`${contact?.firstName} avatar`}
         />
-      </Grid>
-      <Grid xs={8} item>
-        <Grid container>
-          <Grid xs={10} item>
-            <Typography variant={'h6'}>{contact?.firstName + ' ' + contact?.lastName}</Typography>
-          </Grid>
-          <Grid xs={2} item>
-            <ContactMenu contact={contact} />
-          </Grid>
-          <Grid xs={10} item>
-            <Typography>{contact?.phone}</Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+      </CardMedia>
+      <CardContent>
+        <Box display={'flex'} justifyContent={'center'} alignItems={'center'} width={200} flexDirection={'column'}>
+          <Typography variant={'h6'} mb={1}>
+            {contact?.firstName + ' ' + contact?.lastName}
+          </Typography>
+          <Typography>{contact?.phone}</Typography>
+        </Box>
+      </CardContent>
+      <CardActions>
+        <ContactMenu contact={contact} />
+      </CardActions>
+    </Card>
   );
 };
 
