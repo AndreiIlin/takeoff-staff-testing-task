@@ -1,6 +1,7 @@
-import { Button, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { Form, Formik } from 'formik';
+import { Button, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material';
+import { ErrorMessage, Form, Formik } from 'formik';
 import React from 'react';
+import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../../hooks/defaultHooks';
 import { IContact, IModalProps } from '../../models';
 import { changeContact } from '../../slices/thunks/changeContact';
@@ -16,9 +17,17 @@ const ChangeContactForm: React.FC<IModalProps> = ({ handleClose }) => {
     image: contactData!.image,
   };
 
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .required('Field \'First name\' cant`t be empty'),
+    phone: Yup.string()
+      .required('Field \'Phone number\' cant`t be empty'),
+  });
+
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={
         (values) => {
           dispatch(changeContact(values));
@@ -26,22 +35,30 @@ const ChangeContactForm: React.FC<IModalProps> = ({ handleClose }) => {
         }
       }
     >
-      {({ values, handleChange, handleSubmit }) => (
+      {({ values, handleChange, handleSubmit, errors }) => (
         <Form onSubmit={handleSubmit}>
           <DialogTitle>Edit contact</DialogTitle>
           <DialogContent>
             <TextField
-              fullWidth margin={'normal'} label="First name" name="firstName" required
+              fullWidth margin={'normal'} label="First name" name="firstName"
               value={values.firstName} onChange={handleChange}
+              error={!!errors.firstName}
             />
+            <ErrorMessage name="firstName">
+              {msg => <Typography variant={'caption'} color={'red'}>{msg}</Typography>}
+            </ErrorMessage>
             <TextField
               fullWidth margin={'normal'} label="Last name" name="lastName"
               value={values.lastName} onChange={handleChange}
             />
             <TextField
-              fullWidth margin={'normal'} label="Phone number" name="phone" required
+              fullWidth margin={'normal'} label="Phone number" name="phone"
               value={values.phone} onChange={handleChange}
+              error={!!errors.phone}
             />
+            <ErrorMessage name="phone">
+              {msg => <Typography variant={'caption'} color={'red'}>{msg}</Typography>}
+            </ErrorMessage>
             <TextField
               fullWidth margin={'normal'} label="Avatar image" name="image"
               value={values.image} onChange={handleChange}
