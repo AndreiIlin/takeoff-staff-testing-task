@@ -1,10 +1,11 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useAppDispatch } from '../hooks/defaultHooks';
+import { ILoginData } from '../models';
 import { logIn } from '../slices/AuthSlice';
 import { routes } from '../utils/routes';
 
@@ -29,7 +30,7 @@ const LoginForm: React.FC = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(routes.loginData(), values);
+        const response = await axios.post<ILoginData>(routes.loginData(), values);
         dispatch(logIn(response.data));
         navigate('/');
       } catch (err: any) {

@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ILoginData } from '../models';
 
 interface IAuthState {
-  isAuth: boolean,
-}
-
-type logInPayload = {
-  username: string,
-  // token: string,
+  isAuth: boolean;
 }
 
 const initialState: IAuthState = {
@@ -23,7 +19,7 @@ const authSlice = createSlice({
         return JSON.parse(user).token;
       }
     },
-    logIn: (state, { payload }: PayloadAction<logInPayload>) => {
+    logIn: (state, { payload }: PayloadAction<ILoginData>) => {
       localStorage.setItem('contactsApp', JSON.stringify(payload));
       state.isAuth = true;
     },
@@ -34,6 +30,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { getToken, logOut, logIn } = authSlice.actions;
+export const { logOut, logIn } = authSlice.actions;
 
 export default authSlice.reducer;

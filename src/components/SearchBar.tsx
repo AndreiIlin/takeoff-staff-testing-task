@@ -9,7 +9,7 @@ interface IContactsBarProps {
   SetSearchValue: Dispatch<SetStateAction<string>>
 }
 
-const ContactsBar: React.FC<IContactsBarProps> = ({ searchValue, SetSearchValue }) => {
+const SearchBar: React.FC<IContactsBarProps> = ({ searchValue, SetSearchValue }) => {
   const dispatch = useAppDispatch();
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     SetSearchValue(e.target.value);
@@ -47,4 +47,4 @@ const ContactsBar: React.FC<IContactsBarProps> = ({ searchValue, SetSearchValue 
   );
 };
 
-export default ContactsBar;
+export default SearchBar;

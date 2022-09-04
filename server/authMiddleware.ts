@@ -2,6 +2,7 @@ module.exports = (req, res, next) => {
   if (req.url === '/users') {
     console.log('db', req.app.db.__wrapped__.users);
     console.log('body', req.body);
+    const w = req.app.db
     const user = req.app.db.__wrapped__.users.find((user) => user.username === req.body.username);
     if (!user || user.password !== req.body.password) {
       return res.sendStatus(401);

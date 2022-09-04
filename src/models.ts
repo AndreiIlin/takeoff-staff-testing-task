@@ -9,3 +9,8 @@ export interface IContact {
 export interface IModalProps {
   handleClose: () => void;
 }
+
+export interface ILoginData {
+  username: string;
+  password: string;
+}
