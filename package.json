@@ -21,6 +21,7 @@
     "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
+    "concurrently": "^7.3.0",
     "formik": "^2.2.9",
     "json-server": "^0.17.0",
     "react": "^18.2.0",
@@ -38,7 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -w server/db.json -r server/routes.json -m server/authMiddleware.ts -p 3001"
+    "server": "json-server -w server/db.json -r server/routes.json -m server/authMiddleware.ts -p 3001",
+    "start-dev": "concurrently \"npm run server\" \"npm start\""
   },
   "eslintConfig": {
     "extends": [
