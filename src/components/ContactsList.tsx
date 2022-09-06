@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 const ContactsList: React.FC = () => {
   const contacts = useAppSelector(selectors.selectAll);
   const [searchValue, SetSearchValue] = useState('');
-  const searchedContacts = contacts.filter((c) => `${c.firstName}${c.lastName}${c.phone}`.includes(searchValue));
+  const searchedContacts = contacts.filter((c) => `${c.firstName}${c.lastName}${c.phone}`.toLowerCase().includes(searchValue));
 
   return (
     <>
