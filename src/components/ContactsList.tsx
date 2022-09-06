@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppSelector } from '../hooks/defaultHooks';
 import { selectors } from '../slices/contactsSlice';
 import Contact from './Contact';
@@ -7,9 +7,7 @@ import SearchBar from './SearchBar';
 const ContactsList: React.FC = () => {
   const contacts = useAppSelector(selectors.selectAll);
   const [searchValue, SetSearchValue] = useState('');
-  const searchedContacts = useMemo(() => {
-    return contacts.filter((c) => `${c.firstName}${c.lastName}${c.phone}`.includes(searchValue));
-  }, [contacts, searchValue]);
+  const searchedContacts = contacts.filter((c) => `${c.firstName}${c.lastName}${c.phone}`.includes(searchValue));
 
   return (
     <>

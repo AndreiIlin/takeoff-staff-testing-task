@@ -16,7 +16,7 @@ const extraInitialState: IExtraInitialState = {
   error: null,
 };
 
-const isError = (action: AnyAction) => action.type.endsWith('rejected');
+const isError = (action: AnyAction): boolean => action.type.endsWith('rejected');
 
 const contactsAdapter = createEntityAdapter<IContact>({
   sortComparer: (a, b) => a.firstName.localeCompare(b.firstName),
